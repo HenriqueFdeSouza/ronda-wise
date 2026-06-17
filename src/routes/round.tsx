@@ -1,5 +1,5 @@
 import { createFileRoute, Navigate, useNavigate } from "@tanstack/react-router";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CheckCircle2, XCircle, MinusCircle, Camera, ChevronLeft, ChevronRight, Loader2, Trash2 } from "lucide-react";
 import { z } from "zod";
 import { useApp } from "@/contexts/AppContext";
@@ -294,4 +294,4 @@ function ConfButton({ active, onClick, label, icon: Icon, variant }: {
   );
 }
 
-export const useMemoUnused = useMemo;
+
