@@ -9,8 +9,50 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as StartRouteImport } from './routes/start'
+import { Route as RoundRouteImport } from './routes/round'
+import { Route as ReviewRouteImport } from './routes/review'
+import { Route as PdfRouteImport } from './routes/pdf'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as HistoryRouteImport } from './routes/history'
+import { Route as FinishedRouteImport } from './routes/finished'
 import { Route as IndexRouteImport } from './routes/index'
 
+const StartRoute = StartRouteImport.update({
+  id: '/start',
+  path: '/start',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoundRoute = RoundRouteImport.update({
+  id: '/round',
+  path: '/round',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReviewRoute = ReviewRouteImport.update({
+  id: '/review',
+  path: '/review',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PdfRoute = PdfRouteImport.update({
+  id: '/pdf',
+  path: '/pdf',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HistoryRoute = HistoryRouteImport.update({
+  id: '/history',
+  path: '/history',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FinishedRoute = FinishedRouteImport.update({
+  id: '/finished',
+  path: '/finished',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -19,28 +61,130 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/finished': typeof FinishedRoute
+  '/history': typeof HistoryRoute
+  '/login': typeof LoginRoute
+  '/pdf': typeof PdfRoute
+  '/review': typeof ReviewRoute
+  '/round': typeof RoundRoute
+  '/start': typeof StartRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/finished': typeof FinishedRoute
+  '/history': typeof HistoryRoute
+  '/login': typeof LoginRoute
+  '/pdf': typeof PdfRoute
+  '/review': typeof ReviewRoute
+  '/round': typeof RoundRoute
+  '/start': typeof StartRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/finished': typeof FinishedRoute
+  '/history': typeof HistoryRoute
+  '/login': typeof LoginRoute
+  '/pdf': typeof PdfRoute
+  '/review': typeof ReviewRoute
+  '/round': typeof RoundRoute
+  '/start': typeof StartRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/finished'
+    | '/history'
+    | '/login'
+    | '/pdf'
+    | '/review'
+    | '/round'
+    | '/start'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/finished'
+    | '/history'
+    | '/login'
+    | '/pdf'
+    | '/review'
+    | '/round'
+    | '/start'
+  id:
+    | '__root__'
+    | '/'
+    | '/finished'
+    | '/history'
+    | '/login'
+    | '/pdf'
+    | '/review'
+    | '/round'
+    | '/start'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FinishedRoute: typeof FinishedRoute
+  HistoryRoute: typeof HistoryRoute
+  LoginRoute: typeof LoginRoute
+  PdfRoute: typeof PdfRoute
+  ReviewRoute: typeof ReviewRoute
+  RoundRoute: typeof RoundRoute
+  StartRoute: typeof StartRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/start': {
+      id: '/start'
+      path: '/start'
+      fullPath: '/start'
+      preLoaderRoute: typeof StartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/round': {
+      id: '/round'
+      path: '/round'
+      fullPath: '/round'
+      preLoaderRoute: typeof RoundRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/review': {
+      id: '/review'
+      path: '/review'
+      fullPath: '/review'
+      preLoaderRoute: typeof ReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pdf': {
+      id: '/pdf'
+      path: '/pdf'
+      fullPath: '/pdf'
+      preLoaderRoute: typeof PdfRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/history': {
+      id: '/history'
+      path: '/history'
+      fullPath: '/history'
+      preLoaderRoute: typeof HistoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/finished': {
+      id: '/finished'
+      path: '/finished'
+      fullPath: '/finished'
+      preLoaderRoute: typeof FinishedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -53,17 +197,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FinishedRoute: FinishedRoute,
+  HistoryRoute: HistoryRoute,
+  LoginRoute: LoginRoute,
+  PdfRoute: PdfRoute,
+  ReviewRoute: ReviewRoute,
+  RoundRoute: RoundRoute,
+  StartRoute: StartRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
