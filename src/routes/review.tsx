@@ -1,5 +1,5 @@
 import { createFileRoute, Navigate, useNavigate } from "@tanstack/react-router";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SignatureCanvas from "react-signature-canvas";
 import { z } from "zod";
 import { CheckCircle2, RotateCcw, Loader2 } from "lucide-react";
@@ -43,8 +43,8 @@ function Review() {
   const items = checklistService.forHotel(round.hotel_id);
   const sections = checklistService.sectionsForHotel(round.hotel_id);
 
-  // realtime score (recomputed on each render — items/answers are not huge)
-  const score = useMemo(() => calculateRoundScore(items, round.answers), [items, round.answers]);
+  // realtime score
+  const score = calculateRoundScore(items, round.answers);
 
   const finish = async () => {
     if (!sigRef.current || sigRef.current.isEmpty()) {
