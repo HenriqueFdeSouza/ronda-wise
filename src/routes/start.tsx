@@ -89,7 +89,7 @@ function Start() {
           <ThemeToggle />
         </div>
 
-        <div className="mx-auto mt-6 flex max-w-md items-center gap-3 rounded-2xl bg-white/12 p-3 backdrop-blur-sm ring-1 ring-white/15">
+        <div className="mx-auto mt-7 flex max-w-md items-center gap-3 rounded-2xl bg-white/12 p-3 backdrop-blur-sm ring-1 ring-white/15">
           <div className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-white/20 text-base font-black">
             {hotel.logoText}
           </div>
@@ -106,7 +106,7 @@ function Start() {
         </div>
       </header>
 
-      <main className="mx-auto -mt-6 max-w-md space-y-4 px-4">
+      <main className="mx-auto -mt-3 max-w-md space-y-5 px-4">
         {loading ? (
           <div className="h-44 animate-pulse rounded-3xl bg-muted" />
         ) : existing ? (
@@ -146,11 +146,10 @@ function Start() {
                     <button
                       key={s}
                       onClick={() => setShift(s)}
-                      className={`group relative flex h-24 flex-col items-center justify-center gap-1.5 rounded-2xl border-2 text-sm font-semibold transition ${
-                        active
-                          ? "border-primary bg-primary/8 text-primary shadow-soft"
-                          : "border-border bg-background text-muted-foreground hover:border-primary/40"
-                      }`}
+                      className={`group relative flex h-24 flex-col items-center justify-center gap-1.5 rounded-2xl border-2 text-sm font-semibold transition ${active
+                        ? "border-primary bg-primary/8 text-primary shadow-soft"
+                        : "border-border bg-background text-muted-foreground hover:border-primary/40"
+                        }`}
                     >
                       <Icon className="h-6 w-6" />
                       {s === "diurno" ? "Diurno" : "Noturno"}
@@ -172,7 +171,7 @@ function Start() {
               </button>
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
+            <div className="mt-5 grid grid-cols-2 gap-3">
               <div className="rounded-2xl border bg-card p-4 shadow-soft">
                 <div className="flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-wider text-muted-foreground">
                   <Calendar className="h-3 w-3" /> Turno

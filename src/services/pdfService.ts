@@ -328,10 +328,12 @@ export const pdfService = {
         const indCy = ly - 4;
         if (it.type === "conformidade") {
           drawIndicator(indCx, indCy, r.kind);
-          page.drawText(r.text, { x: indCx + 14, y: indCy - 3.5, size: 10, font: bold, color:
-            r.kind === "conforme" ? COLORS.success :
-            r.kind === "nao_conforme" ? COLORS.danger :
-            r.kind === "nao_realizado" ? COLORS.neutral : COLORS.muted });
+          page.drawText(r.text, {
+            x: indCx + 14, y: indCy - 3.5, size: 10, font: bold, color:
+              r.kind === "conforme" ? COLORS.success :
+                r.kind === "nao_conforme" ? COLORS.danger :
+                  r.kind === "nao_realizado" ? COLORS.neutral : COLORS.muted
+          });
           ly -= 14;
         } else {
           // numeric/text response chip

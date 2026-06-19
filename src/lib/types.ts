@@ -20,6 +20,12 @@ export interface UserProfile {
 
 export type ChecklistItemType = "conformidade" | "numero" | "texto";
 
+export type ChecklistAuditKind =
+  | "extintores"
+  | "hidrantes"
+  | "elevadores"
+  | "escadas";
+
 export interface ChecklistItem {
   id: string;
   hotel_id: string;
@@ -28,9 +34,18 @@ export interface ChecklistItem {
   label: string;
   type: ChecklistItemType;
   requiresPhotoIfNonConform?: boolean;
+  auditKind?: ChecklistAuditKind;
 }
 
 export type ConformidadeAnswer = "conforme" | "nao_conforme" | "nao_realizado";
+
+export interface ChecklistIrregularity {
+  id: string;
+  floor?: string;
+  elevator?: "esquerdo" | "direito" | "ambos";
+  description: string;
+  photoIds?: string[];
+}
 
 export interface ChecklistAnswer {
   itemId: string;
@@ -42,6 +57,7 @@ export interface ChecklistAnswer {
   textValue?: string;
   observation?: string;
   photoIds?: string[];
+  irregularities?: ChecklistIrregularity[];
 }
 
 export type RoundStatus = "em_andamento" | "finalizado";

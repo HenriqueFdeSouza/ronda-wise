@@ -50,20 +50,51 @@ export const USERS: UserProfile[] = [
   { id: "u4", hotel_id: "oceani", name: "Eduardo Oceani", email: "oceani@ronda.com", password: "123456", role: "rondante" },
 ];
 
+const blockChecklist = (blockNumber: number): Omit<ChecklistItem, "id" | "hotel_id">[] => {
+  const block = String(blockNumber).padStart(2, "0");
+
+  return [
+    {
+      section: `Bloco ${block}`,
+      order: 1,
+      label: "Extintores / equipamentos de incêndio",
+      type: "conformidade",
+      auditKind: "extintores",
+    },
+    {
+      section: `Bloco ${block}`,
+      order: 2,
+      label: "Hidrantes / mangueiras",
+      type: "conformidade",
+      auditKind: "hidrantes",
+    },
+    {
+      section: `Bloco ${block}`,
+      order: 3,
+      label: "Elevadores",
+      type: "conformidade",
+      auditKind: "elevadores",
+    },
+    {
+      section: `Bloco ${block}`,
+      order: 4,
+      label: "Escadas e rota de fuga",
+      type: "conformidade",
+      auditKind: "escadas",
+    },
+  ];
+};
+
+const blockItems = Array.from({ length: 7 }, (_, index) => blockChecklist(index + 1)).flat();
+
 const baseChecklist: Omit<ChecklistItem, "id" | "hotel_id">[] = [
   // Estacionamento Subsolo Bloco 01
   { section: "Estacionamento Subsolo Bloco 01", order: 1, label: "Vagas livres estacionamento subsolo bloco 01", type: "numero" },
-  { section: "Estacionamento Subsolo Bloco 01", order: 2, label: "Estacionamento subsolo bloco 01", type: "conformidade", requiresPhotoIfNonConform: true },
+  { section: "Estacionamento Subsolo Bloco 01", order: 2, label: "Estacionamento subsolo bloco 01", type: "conformidade" },
   { section: "Estacionamento Subsolo Bloco 01", order: 3, label: "Quantidade de veículos estacionamento subsolo bloco 01", type: "numero" },
 
-  // Blocos
-  { section: "Blocos do Hotel", order: 1, label: "Bloco 01", type: "conformidade" },
-  { section: "Blocos do Hotel", order: 2, label: "Bloco 02", type: "conformidade" },
-  { section: "Blocos do Hotel", order: 3, label: "Bloco 03", type: "conformidade" },
-  { section: "Blocos do Hotel", order: 4, label: "Bloco 04", type: "conformidade" },
-  { section: "Blocos do Hotel", order: 5, label: "Bloco 05", type: "conformidade" },
-  { section: "Blocos do Hotel", order: 6, label: "Bloco 06", type: "conformidade" },
-  { section: "Blocos do Hotel", order: 7, label: "Bloco 07", type: "conformidade" },
+  // Blocos do hotel
+  ...blockItems,
 
   // Estacionamento Bloco 03
   { section: "Estacionamento Bloco 03", order: 1, label: "Estacionamento bloco 03", type: "conformidade" },
@@ -77,7 +108,7 @@ const baseChecklist: Omit<ChecklistItem, "id" | "hotel_id">[] = [
   { section: "Áreas Comuns", order: 4, label: "Área Comum / Piscinas Bar Molhado", type: "conformidade" },
 
   // Estacionamento Subsolo Bloco 07
-  { section: "Estacionamento Subsolo Bloco 07", order: 1, label: "Estacionamento subsolo bloco 07", type: "conformidade", requiresPhotoIfNonConform: true },
+  { section: "Estacionamento Subsolo Bloco 07", order: 1, label: "Estacionamento subsolo bloco 07", type: "conformidade" },
   { section: "Estacionamento Subsolo Bloco 07", order: 2, label: "Quantidade de veículos estacionamento subsolo bloco 07", type: "numero" },
   { section: "Estacionamento Subsolo Bloco 07", order: 3, label: "Vagas livres estacionamento subsolo bloco 07", type: "numero" },
 ];
@@ -94,7 +125,13 @@ export const CHECKLIST_ITEMS: ChecklistItem[] = HOTELS
 
 export const SECTION_ORDER = [
   "Estacionamento Subsolo Bloco 01",
-  "Blocos do Hotel",
+  "Bloco 01",
+  "Bloco 02",
+  "Bloco 03",
+  "Bloco 04",
+  "Bloco 05",
+  "Bloco 06",
+  "Bloco 07",
   "Estacionamento Bloco 03",
   "Áreas Comuns",
   "Estacionamento Subsolo Bloco 07",
